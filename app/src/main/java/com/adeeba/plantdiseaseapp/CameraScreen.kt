@@ -148,6 +148,7 @@ fun CameraScreen(
                 val treatment = result.treatment
                 val prevention = result.prevention
 
+
                 (context as Activity).runOnUiThread {
 
                     isLoading = false
