@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- TOOL CONTENT -->
+    <string name="app_name">किसान मित्र</string>
+    <string name="tool_title_fertilizer">उर्वरक गाइड</string>
+    <string name="fertilizer_1">• नाइट्रोजन: पत्तों की वृद्धि</string>
+    <string name="fertilizer_2">• फॉस्फोरस: जड़ों का विकास</string>
+    <string name="fertilizer_3">• पोटैशियम: पौधे को मजबूत बनाता है</string>
+    <string name="fertilizer_tips_title">सुझाव:</string>
+    <string name="fertilizer_tip1">• जैविक खाद का उपयोग करें</string>
+    <string name="fertilizer_tip2">• अधिक उर्वरक न डालें</string>
+    <string name="fertilizer_tip3">• सुबह या शाम में उपयोग करें</string>
+
+    <string name="tool_title_pesticide">कीटनाशक सुझाव</string>
+    <string name="pesticide_1">• लीफ स्पॉट → मैनकोजेब स्प्रे</string>
+    <string name="pesticide_2">• एफिड्स → नीम तेल स्प्रे</string>
+    <string name="pesticide_3">• पीले पत्ते → फंगल जांच करें</string>
+    <string name="pesticide_safety_title">सुरक्षा:</string>
+    <string name="pesticide_tip1">• दस्ताने पहनें</string>
+    <string name="pesticide_tip2">• धूप में स्प्रे न करें</string>
+    <string name="pesticide_tip3">• बच्चों से दूर रखें</string>
+
+    <string name="tool_title_farming">खेती सुझाव</string>
+    <string name="farming_1">• नियमित पानी दें</string>
+    <string name="farming_2">• पर्याप्त धूप सुनिश्चित करें</string>
+    <string name="farming_3">• अच्छे बीज का उपयोग करें</string>
+    <string name="farming_4">• मौसम के अनुसार खेती करें</string>
+    <string name="farming_5">• मौसम देखकर खेती करें</string>
+
+    <string name="healthy_voice">आपका पौधा स्वस्थ है</string>
+    <string name="disease_detected">रोग पाया गया</string>
+
+    <string name="high_confidence">उच्च विश्वास</string>
+    <string name="medium_confidence">मध्यम विश्वास</string>
+    <string name="low_confidence">कम विश्वास</string>
+
+    <string name="healthy_label">स्वस्थ</string>
+    <string name="diseased_label">रोगग्रस्त</string>
+
+    <string name="back">वापस</string>
+
+    <string name="ai_diagnosis">AI निदान</string>
+
+    <string name="detected_disease">पता चला रोग</string>
+    <string name="unknown_disease">अज्ञात रोग</string>
+
+    <string name="description">विवरण</string>
+    <string name="treatment">उपचार</string>
+    <string name="prevention">रोकथाम</string>
+
+    <string name="no_description">कोई विवरण उपलब्ध नहीं</string>
+    <string name="no_treatment">कोई उपचार उपलब्ध नहीं</string>
+    <string name="no_prevention">कोई रोकथाम उपलब्ध नहीं</string>
+
+    <string name="scan_again">फिर से स्कैन करें</string>
+    <string name="speak_result">परिणाम सुनें</string>
+
+</resources>

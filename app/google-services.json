@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "591436852873",
+    "project_id": "plantdiseaseapp-6021a",
+    "storage_bucket": "plantdiseaseapp-6021a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591436852873:android:7b020577ce6a4bd695a058",
+        "android_client_info": {
+          "package_name": "com.adeeba.plantdiseaseapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdI_1j6KP_4yqRooFZGTq-hoAA7QIXEcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

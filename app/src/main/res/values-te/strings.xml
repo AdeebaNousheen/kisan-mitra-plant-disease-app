@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- TOOL CONTENT -->
+    <string name="app_name">కిసాన్ మిత్ర</string>
+    <string name="tool_title_fertilizer">ఎరువు గైడ్</string>
+    <string name="fertilizer_1">• నైట్రోజన్: ఆకుల పెరుగుదల</string>
+    <string name="fertilizer_2">• ఫాస్ఫరస్: వేర్ల అభివృద్ధి</string>
+    <string name="fertilizer_3">• పొటాషియం: మొక్క బలం</string>
+    <string name="fertilizer_tips_title">సూచనలు:</string>
+    <string name="fertilizer_tip1">• సేంద్రియ ఎరువులు వాడండి</string>
+    <string name="fertilizer_tip2">• ఎక్కువ ఎరువులు వాడవద్దు</string>
+    <string name="fertilizer_tip3">• ఉదయం లేదా సాయంత్రం వాడండి</string>
+
+    <string name="tool_title_pesticide">పురుగుమందు సూచనలు</string>
+    <string name="pesticide_1">• లీఫ్ స్పాట్ → మాంకోజెబ్ స్ప్రే</string>
+    <string name="pesticide_2">• ఆఫిడ్స్ → నీమ్ ఆయిల్ స్ప్రే</string>
+    <string name="pesticide_3">• పసుపు ఆకులు → ఫంగల్ చెక్</string>
+    <string name="pesticide_safety_title">భద్రత:</string>
+    <string name="pesticide_tip1">• గ్లోవ్స్ ధరించండి</string>
+    <string name="pesticide_tip2">• ఎండలో స్ప్రే చేయవద్దు</string>
+    <string name="pesticide_tip3">• పిల్లల నుండి దూరంగా ఉంచండి</string>
+
+    <string name="tool_title_farming">వ్యవసాయ సూచనలు</string>
+    <string name="farming_1">• క్రమంగా నీరు ఇవ్వండి</string>
+    <string name="farming_2">• సరైన సూర్యకాంతి ఇవ్వండి</string>
+    <string name="farming_3">• మంచి విత్తనాలు వాడండి</string>
+    <string name="farming_4">• సీజన్ ప్రకారం పంటలు వేయండి</string>
+    <string name="farming_5">• వాతావరణం చూసి వ్యవసాయం చేయండి</string>
+
+    <string name="healthy_voice">మీ మొక్క ఆరోగ్యంగా ఉంది</string>
+    <string name="disease_detected">వ్యాధి గుర్తించబడింది</string>
+
+    <string name="high_confidence">అధిక నమ్మకం</string>
+    <string name="medium_confidence">మధ్యస్థ నమ్మకం</string>
+    <string name="low_confidence">తక్కువ నమ్మకం</string>
+
+    <string name="healthy_label">ఆరోగ్యంగా ఉంది</string>
+    <string name="diseased_label">వ్యాధి ఉంది</string>
+
+    <string name="back">వెనక్కి</string>
+
+    <string name="ai_diagnosis">AI విశ్లేషణ</string>
+
+    <string name="detected_disease">గుర్తించిన వ్యాధి</string>
+    <string name="unknown_disease">తెలియని వ్యాధి</string>
+
+    <string name="description">వివరణ</string>
+    <string name="treatment">చికిత్స</string>
+    <string name="prevention">నివారణ</string>
+
+    <string name="no_description">వివరణ లేదు</string>
+    <string name="no_treatment">చికిత్స లేదు</string>
+    <string name="no_prevention">నివారణ లేదు</string>
+
+    <string name="scan_again">మళ్లీ స్కాన్ చేయండి</string>
+    <string name="speak_result">ఫలితం వినండి</string>
+
+</resources>

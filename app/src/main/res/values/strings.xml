@@ -1,0 +1,92 @@
+<resources>
+
+    <!-- APP -->
+    <string name="app_name">Kisan Mitra</string>
+    <string name="app_name_title">Kisan Mitra</string>
+
+    <!-- HOME SCREEN -->
+    <string name="ai_assistant">AI Assistant</string>
+    <string name="detect_disease">Detect Crop Disease</string>
+    <string name="capture">Capture</string>
+    <string name="today">Today</string>
+
+    <!-- TOOLS -->
+    <string name="tools">Tools</string>
+    <string name="fertilizer">Fertilizer</string>
+    <string name="pesticide">Pesticide</string>
+    <string name="farming">Farming</string>
+
+    <!-- QUICK TIPS (🔥 MISSING BEFORE) -->
+    <string name="quick_tips">Quick Tips</string>
+    <string name="tip1">Water plants early morning</string>
+    <string name="tip2">Avoid strong afternoon sunlight</string>
+    <string name="tip3">Check leaves regularly</string>
+    <string name="tip4">Use organic compost</string>
+
+    <!-- TOOL CONTENT -->
+    <string name="tool_title_fertilizer">Fertilizer Guide</string>
+    <string name="fertilizer_1">Nitrogen (N): Helps leaf growth</string>
+    <string name="fertilizer_2">Phosphorus (P): Helps root development</string>
+    <string name="fertilizer_3">Potassium (K): Improves plant strength</string>
+    <string name="fertilizer_tips_title">Tips:</string>
+    <string name="fertilizer_tip1">Use organic compost</string>
+    <string name="fertilizer_tip2">Avoid over-fertilizing</string>
+    <string name="fertilizer_tip3">Apply in morning or evening</string>
+
+    <string name="tool_title_pesticide">Pesticide Recommendations</string>
+    <string name="pesticide_1">Leaf Spot - Mancozeb spray</string>
+    <string name="pesticide_2">Aphids - Neem oil spray</string>
+    <string name="pesticide_3">Yellow leaves - Check fungal infection</string>
+    <string name="pesticide_safety_title">Safety:</string>
+    <string name="pesticide_tip1">Wear gloves while spraying</string>
+    <string name="pesticide_tip2">Do not spray in strong sunlight</string>
+    <string name="pesticide_tip3">Keep away from children</string>
+
+    <string name="tool_title_farming">Smart Farming Tips</string>
+    <string name="farming_1">Water regularly (not too much)</string>
+    <string name="farming_2">Ensure proper sunlight</string>
+    <string name="farming_3">Use quality seeds</string>
+    <string name="farming_4">Follow seasonal crops</string>
+    <string name="farming_5">Check weather before farming</string>
+
+    <!-- AI ASSISTANT -->
+    <string name="ask_something">Ask something...</string>
+    <string name="send">Send</string>
+
+    <!-- RESULT SCREEN -->
+
+    <string name="healthy_voice">Your plant is healthy</string>
+    <string name="disease_detected">Disease detected</string>
+
+    <string name="high_confidence">High Confidence</string>
+    <string name="medium_confidence">Medium Confidence</string>
+    <string name="low_confidence">Low Confidence</string>
+
+    <!-- RESULT LABELS -->
+
+    <string name="healthy_label">Healthy</string>
+    <string name="diseased_label">Diseased</string>
+
+    <string name="back">Back</string>
+
+    <!-- RESULT SCREEN FULL TEXT -->
+
+    <string name="ai_diagnosis">AI Diagnosis</string>
+
+    <string name="detected_disease">Detected Disease</string>
+    <string name="unknown_disease">Unknown Disease</string>
+
+    <string name="description">Description</string>
+    <string name="treatment">Treatment</string>
+    <string name="prevention">Prevention</string>
+
+    <string name="no_description">No description available</string>
+    <string name="no_treatment">No treatment available</string>
+    <string name="no_prevention">No prevention available</string>
+
+    <!-- ACTION BUTTONS -->
+
+    <string name="scan_again">Scan Again</string>
+    <string name="speak_result">Speak Result</string>
+
+</resources>
