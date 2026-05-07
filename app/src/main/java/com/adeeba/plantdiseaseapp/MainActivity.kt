@@ -1,7 +1,7 @@
 package com.adeeba.plantdiseaseapp
 
-import android.os.Bundle
 import android.content.Context
+import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import kotlinx.coroutines.launch
 import com.adeeba.plantdiseaseapp.entity.DetectionEntity
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -27,6 +28,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser == null) {
+            auth.signInAnonymously()
+        }
+
         setContent {
 
             val context = this
@@ -39,8 +45,9 @@ class MainActivity : ComponentActivity() {
             var savedCrops by remember { mutableStateOf(listOf<String>()) }
             var selectedCrop by remember { mutableStateOf("Tomato") }
 
-            // 🔥 HISTORY SELECTED ITEM
             var selectedDetection by remember { mutableStateOf<DetectionEntity?>(null) }
+
+            var selectedTool by remember { mutableStateOf("") }
 
             LaunchedEffect(Unit) {
                 savedCrops = CropStorage.getCrops(context)
@@ -48,7 +55,6 @@ class MainActivity : ComponentActivity() {
 
             val drawerState = rememberDrawerState(DrawerValue.Closed)
 
-            // RESULT STATE
             var disease by remember { mutableStateOf("") }
             var confidence by remember { mutableStateOf(0.0) }
             var description by remember { mutableStateOf("") }
@@ -60,10 +66,8 @@ class MainActivity : ComponentActivity() {
                 ModalNavigationDrawer(
                     drawerState = drawerState,
                     drawerContent = {
-
                         ModalDrawerSheet {
 
-                            // ✅ HISTORY BUTTON
                             TextButton(
                                 onClick = {
                                     selectedScreen = "history"
@@ -93,7 +97,6 @@ class MainActivity : ComponentActivity() {
 
                     Scaffold(
 
-                        // 🔝 TOP BAR
                         topBar = {
                             if (selectedScreen == "assistant") {
                                 TopAppBar(
@@ -118,9 +121,8 @@ class MainActivity : ComponentActivity() {
                             }
                         },
 
-                        // 🔽 BOTTOM NAV
                         bottomBar = {
-                            if (selectedScreen != "assistant") {
+                            if (selectedScreen != "assistant" && selectedScreen != "tool") {
                                 NavigationBar {
 
                                     NavigationBarItem(
@@ -170,18 +172,39 @@ class MainActivity : ComponentActivity() {
 
                                 "crops" -> CropsScreen(
                                     selectedCrops = savedCrops,
-                                    onScanClick = { crop ->
-                                        selectedCrop = crop
+                                    onScanClick = {
+                                        selectedCrop = it
                                         selectedScreen = "scan"
                                     },
                                     onAddCropClick = { selectedScreen = "selectCrops" },
                                     onAssistantClick = { selectedScreen = "assistant" },
-                                    onToolClick = { selectedScreen = it },
+                                    onToolClick = {
+                                        selectedTool = it
+                                        selectedScreen = "tool"
+                                    },
                                     language = language
                                 )
 
-                                "selectCrops" -> SelectCropsScreen { crops ->
-                                    CropStorage.saveCrops(context, crops)
+                                // ✅ FIXED TOOL NAVIGATION
+                                "tool" -> when (selectedTool) {
+
+                                    "farming" -> FarmingScreen(
+                                        onBack = { selectedScreen = "crops" }
+                                    )
+
+                                    "pesticide" -> PesticideScreen(
+                                        onBack = { selectedScreen = "crops" }
+                                    )
+
+                                    "fertilizer" -> FertilizerScreen(
+                                        onBack = { selectedScreen = "crops" }
+                                    )
+
+                                    else -> selectedScreen = "crops"
+                                }
+
+                                "selectCrops" -> SelectCropsScreen {
+                                    CropStorage.saveCrops(context, it)
                                     savedCrops = CropStorage.getCrops(context)
                                     selectedScreen = "crops"
                                 }
@@ -195,7 +218,6 @@ class MainActivity : ComponentActivity() {
                                     }
                                 )
 
-                                // 📷 CAMERA
                                 "scan" -> CameraScreen(
                                     language = language,
                                     selectedCrop = selectedCrop,
@@ -210,7 +232,6 @@ class MainActivity : ComponentActivity() {
                                     onBack = { selectedScreen = "crops" }
                                 )
 
-                                // 📊 RESULT FROM CAMERA
                                 "result" -> DiseaseResultScreen(
                                     imagePath = "",
                                     disease = disease,
@@ -223,47 +244,15 @@ class MainActivity : ComponentActivity() {
                                     language = language
                                 )
 
-                                // 📜 HISTORY LIST
-                                "history" -> DetectionHistoryScreen(
-                                    onItemClick = { item ->
-                                        selectedDetection = item
-                                        selectedScreen = "history_result"
-                                    },
-                                    onBack = { selectedScreen = "crops" }
-                                )
-
-                                // 🔥 FIXED (IMPORTANT)
-                                "history_result" -> {
-                                    selectedDetection?.let {
-                                        DiseaseResultScreen(
-                                            imagePath = "",
-                                            disease = it.name,
-                                            confidence = it.confidence,
-                                            description = it.description,
-                                            treatment = it.treatment,
-                                            prevention = it.prevention,
-                                            onScanAgain = { selectedScreen = "scan" },
-                                            onBack = { selectedScreen = "history" },
-                                            language = language
-                                        )
-                                    } ?: run {
-                                        // ✅ PREVENT BLANK SCREEN
-                                        selectedScreen = "history"
-                                    }
-                                }
-
                                 "videos" -> VideoScreen()
                                 "community" -> CommunityScreen()
 
-                                // 🔥 PROFILE CLICK → RESULT (FIXED)
                                 "profile" -> ProfileScreen { name, conf, desc, treat, prev ->
-
                                     disease = name
                                     confidence = conf
                                     description = desc
                                     treatment = treat
                                     prevention = prev
-
                                     selectedScreen = "result"
                                 }
                             }

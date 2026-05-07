@@ -54,6 +54,13 @@ android {
 
 dependencies {
 
+    // 🔥 Firebase BOM (MUST BE FIRST)
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // 🔥 Firebase (NO versions here)
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+
     // ✅ Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -90,14 +97,18 @@ dependencies {
     // ✅ Image Loading
     implementation("io.coil-kt:coil-compose:2.5.0")
 
-    // ✅ Firebase Firestore
-    implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
-
-    // ✅ Networking (Retrofit + OkHttp)
+    // ✅ Networking
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // ✅ Extra libs
+    implementation("com.google.guava:guava:31.1-android")
+    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("org.tensorflow:tensorflow-lite:2.14.0")
 
     // ✅ Testing
     testImplementation(libs.junit)
@@ -108,20 +119,12 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("com.google.guava:guava:31.1-android")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("com.google.android.exoplayer:exoplayer:2.19.1")
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation ("androidx.compose.foundation:foundation")
-    implementation("org.tensorflow:tensorflow-lite:2.14.0")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }

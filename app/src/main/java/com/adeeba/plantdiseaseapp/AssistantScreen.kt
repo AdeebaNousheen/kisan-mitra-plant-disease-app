@@ -7,21 +7,22 @@ import android.speech.tts.TextToSpeech
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.adeeba.plantdiseaseapp.entity.*
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
-import com.adeeba.plantdiseaseapp.ChatDao
+import com.adeeba.plantdiseaseapp.entity.ChatMessage
+import androidx.compose.foundation.lazy.rememberLazyListState
 
 @Composable
 fun AssistantScreen(
@@ -39,43 +40,40 @@ fun AssistantScreen(
     val scope = rememberCoroutineScope()
     var isLoading by remember { mutableStateOf(false) }
 
-    // 🌍 LANGUAGE MAP
+    // 🌍 Language
     val locale = when (language.lowercase()) {
         "hindi" -> Locale("hi", "IN")
         "telugu" -> Locale("te", "IN")
         else -> Locale.ENGLISH
     }
 
-    // 🔊 TEXT TO SPEECH (MULTI LANGUAGE)
-    val tts = remember {
-        TextToSpeech(context) {}
-    }
+    // 🔊 TTS
+    val tts = remember { TextToSpeech(context) {} }
 
     LaunchedEffect(language) {
         tts.language = locale
     }
 
-    // 🎤 SPEECH INPUT (MULTI LANGUAGE)
+    // 🎤 Speech input
     val speechLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
-            val result =
-                it.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            val result = it.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
             if (!result.isNullOrEmpty()) inputText = result[0]
         }
     }
 
     val listState = rememberLazyListState()
 
-    // 📥 LOAD CHAT
+    // 📥 Load messages
     LaunchedEffect(chatId) {
         val messages = dao.getMessages(chatId)
         chatList.clear()
         chatList.addAll(messages)
     }
 
-    // 🔽 AUTO SCROLL
+    // 🔽 Auto scroll
     LaunchedEffect(chatList.size) {
         if (chatList.isNotEmpty()) {
             listState.animateScrollToItem(chatList.size - 1)
@@ -117,15 +115,13 @@ fun AssistantScreen(
                         ) {
                             Text(
                                 text = msg.message,
-                                modifier = Modifier.padding(12.dp),
-                                color = MaterialTheme.colorScheme.onSurface
+                                modifier = Modifier.padding(12.dp)
                             )
                         }
 
-                        // 🔊 SPEAK (MULTI LANGUAGE)
+                        // 🔊 Speak button
                         if (msg.sender == "bot") {
                             Row {
-
                                 IconButton(onClick = {
                                     tts.language = locale
                                     tts.speak(
@@ -163,7 +159,7 @@ fun AssistantScreen(
 
         Divider()
 
-        // ✉️ INPUT
+        // ✉️ INPUT BAR
         Row(
             Modifier
                 .fillMaxWidth()
@@ -179,24 +175,20 @@ fun AssistantScreen(
                 placeholder = { Text("Ask something...") }
             )
 
+            // 🎤 MIC
             IconButton(onClick = {
                 val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-
-                intent.putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE,
-                    locale
-                )
-
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, locale)
                 intent.putExtra(
                     RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
                 )
-
                 speechLauncher.launch(intent)
             }) {
                 Icon(Icons.Default.Mic, null)
             }
 
+            // 📤 SEND
             Button(onClick = {
 
                 if (inputText.isNotBlank()) {
@@ -213,7 +205,6 @@ fun AssistantScreen(
                         chatList.count { it.sender == "user" } == 1
 
                     scope.launch(Dispatchers.IO) {
-
                         dao.insertMessage(userMsg)
 
                         if (isFirstMessage) {
@@ -226,25 +217,18 @@ fun AssistantScreen(
 
                     isLoading = true
 
-                    // 🌍 STRONG MULTILINGUAL PROMPT
-                    val finalPrompt = """
-You are a helpful agriculture AI assistant.
+                    // 🔥 NEW CLEAN CALL (Gemini / API)
+                    sendChatMessage(context, inputText, language) { response ->
 
-IMPORTANT:
-- Reply ONLY in the SAME language as the user.
-- Do NOT translate to English.
-- Keep response natural and simple.
-
-User message:
-$inputText
-""".trimIndent()
-
-                    sendChatMessage(context, finalPrompt, language) { response ->
+                        val safeResponse =
+                            if (response.isBlank() || response == "null") {
+                                "⚠️ No valid response"
+                            } else response
 
                         val botMsg = ChatMessage(
                             chatId = chatId,
                             sender = "bot",
-                            message = response
+                            message = safeResponse
                         )
 
                         chatList.add(botMsg)

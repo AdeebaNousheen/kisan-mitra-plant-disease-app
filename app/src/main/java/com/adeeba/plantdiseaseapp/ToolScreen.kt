@@ -1,112 +1,71 @@
 package com.adeeba.plantdiseaseapp
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.res.stringResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ToolScreen(toolName: String) {
+fun ToolScreen(
+    toolName: String,
+    onBack: () -> Unit
+) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp)
-    ) {
+    when (toolName.lowercase()) {
 
-        // ✅ TITLE (dynamic)
-        val title = when (toolName) {
-            "Fertilizer" -> stringResource(R.string.fertilizer)
-            "Pesticide" -> stringResource(R.string.pesticide)
-            "Farming" -> stringResource(R.string.farming)
-            else -> toolName
+        "fertilizer" -> {
+            FertilizerScreen(onBack)
         }
 
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
+        "pesticide" -> {
+            PesticideScreen(onBack)
+        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        "farming" -> {
+            FarmingScreen(onBack)
+        }
 
-        when (toolName) {
-            "Fertilizer" -> FertilizerContent()
-            "Pesticide" -> PesticideContent()
-            "Farming" -> FarmingContent()
+        else -> {
+            SimpleMessageScreen("Tool not found", onBack)
         }
     }
 }
 
+// ================================
+// 📌 FALLBACK SCREEN (NO ERROR NOW)
+// ================================
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FertilizerContent() {
+fun SimpleMessageScreen(
+    message: String,
+    onBack: () -> Unit
+) {
 
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp)) {
-
-            Text(stringResource(R.string.tool_title_fertilizer), fontWeight = FontWeight.Bold)
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(stringResource(R.string.fertilizer_1))
-            Text(stringResource(R.string.fertilizer_2))
-            Text(stringResource(R.string.fertilizer_3))
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(stringResource(R.string.fertilizer_tips_title), fontWeight = FontWeight.SemiBold)
-            Text(stringResource(R.string.fertilizer_tip1))
-            Text(stringResource(R.string.fertilizer_tip2))
-            Text(stringResource(R.string.fertilizer_tip3))
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Info") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = null)
+                    }
+                }
+            )
         }
-    }
-}
+    ) { padding ->
 
-@Composable
-fun PesticideContent() {
-
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp)) {
-
-            Text(stringResource(R.string.tool_title_pesticide), fontWeight = FontWeight.Bold)
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(stringResource(R.string.pesticide_1))
-            Text(stringResource(R.string.pesticide_2))
-            Text(stringResource(R.string.pesticide_3))
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(stringResource(R.string.pesticide_safety_title), fontWeight = FontWeight.SemiBold)
-            Text(stringResource(R.string.pesticide_tip1))
-            Text(stringResource(R.string.pesticide_tip2))
-            Text(stringResource(R.string.pesticide_tip3))
-        }
-    }
-}
-
-@Composable
-fun FarmingContent() {
-
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp)) {
-
-            Text(stringResource(R.string.tool_title_farming), fontWeight = FontWeight.Bold)
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(stringResource(R.string.farming_1))
-            Text(stringResource(R.string.farming_2))
-            Text(stringResource(R.string.farming_3))
-            Text(stringResource(R.string.farming_4))
-            Text(stringResource(R.string.farming_5))
+        Box(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = message)
         }
     }
 }
