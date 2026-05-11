@@ -60,7 +60,7 @@ The app allows users to scan crop images using AI and receive disease prediction
 
 ## 📥 APK Download
 [Download APK]
-(https://github.com/AdeebaNousheen/kisan-mitra-plant-disease-app/blob/40bd31c18123c65a5af9c9e682c681ae9be71e98/app-debug-androidTest.apk)
+(https://github.com/AdeebaNousheen/kisan-mitra-plant-disease-app/blob/c3b4283556fc6fad1f88b828c3d068c15668cec3/KisanMitra.apk)
 (https://github.com/AdeebaNousheen/kisan-mitra-plant-disease-app/blob/40bd31c18123c65a5af9c9e682c681ae9be71e98/output-metadata.json)
 ---
 
